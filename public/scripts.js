@@ -111,5 +111,18 @@ const PhotosUpload = {
     PhotosUpload.input.files = PhotosUpload.getAllFiles()
 
     photoContainer.remove()
+  },
+
+  removeOldPhoto(event) {
+    const photoContainer = event.target.parentNode
+
+    if(photoContainer.id) {
+      const removedFiles = document.querySelector('input[name="removed_files"')
+      if(removedFiles){
+        removedFiles.value += `${photoContainer.id},`
+      }
+    }
+
+    photoContainer.remove()
   }
 }
