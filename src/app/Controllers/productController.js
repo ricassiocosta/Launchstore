@@ -66,9 +66,14 @@ module.exports = {
     const keys = Object.keys(req.body)
 
     for(key of keys) {
-      if(req.body[key] == "" && key != "removed-files") {
+      if(req.body[key] == "" && key != "removed_files") {
         return res.send("Por favor, preencha todos os campos!")
       }
+    }
+
+    if(req.files.length != 0) {
+      const newFilesPromise = req.files.map(file => File.create(file, req.body.id))
+      await Promise.all(newFilesPromise)
     }
 
     if(req.body.removed_files) {
