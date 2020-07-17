@@ -7,15 +7,15 @@ routes.get('/', (req, res) => {
   return res.render('layout.njk')
 })
 
-routes.get('/products/create', ProductController.create)
-routes.get('/products/:id/edit', ProductController.edit)
+routes.get('/produtos/criar', ProductController.create)
+routes.get('/produtos/:id/edit', ProductController.edit)
 
-routes.post('/products', multer.array('photos', 6), ProductController.post)
-routes.put('/products', multer.array('photos', 6), ProductController.put)
-routes.delete('/products', ProductController.delete)
+routes.post('/produtos', multer.array('photos', 6), ProductController.post)
+routes.put('/produtos', multer.array('photos', 6), ProductController.put)
+routes.delete('/produtos', ProductController.delete)
 
 //Alias
-routes.get('/ads/create', (req, res) => {
-  return res.redirect('/products/create')
+routes.get('/anuncios/criar', (req, res) => {
+  return res.redirect('/produtos/criar')
 })
 module.exports = routes
