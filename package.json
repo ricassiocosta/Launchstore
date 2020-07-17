@@ -1,5 +1,5 @@
 {
-  "name": "module_06_launchstore",
+  "name": "launchstore",
   "version": "1.0.0",
   "main": "server.js",
   "license": "MIT",
