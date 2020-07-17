@@ -1,3 +1,5 @@
+const Category = require('../Models/Category')
+
 module.exports = {
   create(req, res) {
     // Pegar as categorias
