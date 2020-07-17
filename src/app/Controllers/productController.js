@@ -36,7 +36,7 @@ module.exports = {
     })
     await Promise.all(filesPromise)
 
-    return res.redirect(`products/${productID}/edit`)
+    return res.redirect(`produtos/${productID}/editar`)
   },
 
   async edit(req, res) {
@@ -80,12 +80,12 @@ module.exports = {
     }
 
     await Product.update(req.body)
-    return res.redirect(`/products/${req.body.id}/edit`)
+    return res.redirect(`/produtos/${req.body.id}/editar`)
   },
 
   async delete(req, res) {
     await Product.delete(req.body.id)
 
-    return res.redirect('/products/create')
+    return res.redirect('/produtos/criar')
   } 
 }

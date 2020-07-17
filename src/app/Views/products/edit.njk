@@ -3,7 +3,7 @@
 {% block content %}
 
 <section class="container form">
-  <form method="POST" action="/products?_method=PUT" enctype="multipart/form-data">
+  <form method="POST" action="/produtos?_method=PUT" enctype="multipart/form-data">
 
     <div class="header">
       <h3>Editar Produto {{productID}}</h3>
@@ -17,7 +17,7 @@
     <label for="delete" class="button delete">Deletar</label>
   </form>
 
-  <form id="form-delete" action="/products?_method=DELETE" method="POST">
+  <form id="form-delete" action="/produtos?_method=DELETE" method="POST">
     <input name="id" value="{{ product.id }}">
     <button id="delete" class="button" type="submit"></button>
   </form>
