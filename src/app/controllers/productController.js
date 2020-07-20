@@ -40,7 +40,11 @@ module.exports = {
   },
 
   async show(req, res) {
-    return res.render('products/show')
+    let results = await Product.find(req.params.id)
+    const product = results.rows[0]
+    if(!product) return res.send('Produto não encontrado!')
+
+    return res.render('products/show', { product })
   },
 
   async edit(req, res) {
