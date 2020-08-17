@@ -12,6 +12,34 @@ const Mask = {
       currency: 'BRL'
     }).format(value/100)
   },
+  cpfCnpj(value) {
+    value = value.replace(/\D/g, "")
+    
+    if(value.length > 14) {
+      value = value.slice(0, -1)
+    }
+
+    if(isCpf(value)) {
+      value = value.replace(/(\d{3})(\d)/, "$1.$2")
+      value = value.replace(/(\d{3})(\d)/, "$1.$2")
+      value = value.replace(/(\d{3})(\d)/, "$1-$2")
+    } else {
+      value = value.replace(/(\d{2})(\d)/, "$1.$2")
+      value = value.replace(/(\d{3})(\d)/, "$1.$2")
+      value = value.replace(/(\d{3})(\d)/, "$1/$2")
+      value = value.replace(/(\d{4})(\d)/, "$1-$2")
+    }
+
+    function isCpf(value) {
+      if(value.length <= 11) {
+        return true
+      } else {
+        return false
+      }
+    }
+
+    return value
+  }
 }
 
 // Delete confirmation

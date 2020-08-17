@@ -59,6 +59,7 @@
       name="cpf_cnpj" 
       placeholder="Digite seu documento" 
       value="{{user.cpf_cnpj}}"
+      onkeydown="Mask.apply(this, 'cpfCnpj')"
       required
     >
   </div>
