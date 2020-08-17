@@ -15,4 +15,8 @@ routes.get('/anuncios/criar', (req, res) => {
   return res.redirect('produtos/criar')
 })
 
+routes.get('/conta', (req, res) => {
+  return res.redirect('usuarios/registrar')
+})
+
 module.exports = routes
