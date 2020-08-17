@@ -73,6 +73,7 @@
       name="cep" 
       placeholder="Digite o código postal" 
       value="{{user.cep}}"
+      onkeydown="Mask.apply(this, 'cep')"
       required
     >
   </div>
