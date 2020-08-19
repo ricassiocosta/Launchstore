@@ -26,4 +26,50 @@ module.exports = {
       currency: 'BRL'
     }).format(price/100)
   },
+  formatBRL(value) {
+    value = value.replace(/\D/g, "")
+
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value/100)
+  },
+  formatCpfCnpj(value) {
+    value = value.replace(/\D/g, "")
+
+    if(value.length > 14) {
+      value = value.slice(0, -1)
+    }
+
+    if(isCpf(value)) {
+      value = value.replace(/(\d{3})(\d)/, "$1.$2")
+      value = value.replace(/(\d{3})(\d)/, "$1.$2")
+      value = value.replace(/(\d{3})(\d)/, "$1-$2")
+    } else {
+      value = value.replace(/(\d{2})(\d)/, "$1.$2")
+      value = value.replace(/(\d{3})(\d)/, "$1.$2")
+      value = value.replace(/(\d{3})(\d)/, "$1/$2")
+      value = value.replace(/(\d{4})(\d)/, "$1-$2")
+    }
+
+    function isCpf(value) {
+      if(value.length <= 11) {
+        return true
+      } else {
+        return false
+      }
+    }
+
+    return value
+  },
+  formatCep(value) {
+    value = value.replace(/\D/g, "")
+
+    if(value.length > 8) {
+      value = value.slice(0, -1)
+    }
+
+    value = value.replace(/(\d{5})(\d)/, "$1-$2")
+    return value
+  }
 }
