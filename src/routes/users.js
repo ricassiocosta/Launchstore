@@ -22,7 +22,7 @@ const Validator = require('../app/validators/user')
 routes.get('/registrar', UserController.registerForm)
 routes.post('/registrar', Validator.post, UserController.post)
 
-routes.get('/usuarios', UserController.show)
+routes.get('/', UserController.show)
 // routes.put('/', UserController.put)
 // routes.delete('/', UserController.delete)
 
