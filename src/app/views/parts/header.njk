@@ -25,11 +25,29 @@
             Novo Anúncio
           </a>
         </li>
-        <li>
+        <li class="accounts">
           <a href="/conta">
             <i class="material-icons">account_circle</i>
             Minha Conta
           </a>
+          {% if user %}
+          <ul class="submenu">
+            <li>
+              <a href="/usuarios">Configurações</a>
+            </li>
+            <li>
+              <a href="/comprar">Meus pedidos</a>
+            </li>
+            <li>
+              <a href="/vender">Minhas vendas</a>
+            </li>
+            <li>
+              <form action="/usuarios/logout" method="POST">
+                <button>Sair</button>
+              </form>
+            </li>
+          </ul>
+          {% endif %}
         </li>
       </ul>
     </nav>
