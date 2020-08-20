@@ -7,8 +7,9 @@ module.exports = {
 
   },
 
-  logout() {
-
+  logout(req, res) {
+    req.session.destroy()
+    return res.redirect('/')
   },
 
   forgotForm() {
