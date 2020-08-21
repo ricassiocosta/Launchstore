@@ -1,10 +1,12 @@
 module.exports = {
   loginForm(req, res) {
-    return res.render('session/index')
+    return res.render('session/login')
   },
 
-  login() {
+  login(req, res) {
+    req.session.userId = req.user.id
 
+    return res.redirect('/usuarios')
   },
 
   logout(req, res) {
