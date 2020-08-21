@@ -16,7 +16,7 @@ routes.get('/anuncios/criar', (req, res) => {
 })
 
 routes.get('/conta', (req, res) => {
-  return res.redirect('usuarios/registrar')
+  return res.redirect('usuarios/login')
 })
 
 module.exports = routes

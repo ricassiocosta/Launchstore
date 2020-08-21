@@ -1,6 +1,6 @@
 module.exports = {
-  loginForm() {
-
+  loginForm(req, res) {
+    return res.render('session/index')
   },
 
   login() {
