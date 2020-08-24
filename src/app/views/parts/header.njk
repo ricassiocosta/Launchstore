@@ -30,10 +30,10 @@
             <i class="material-icons">account_circle</i>
             Minha Conta
           </a>
-          {% if user %}
+          {% if session.userId %}
           <ul class="submenu">
             <li>
-              <a href="/usuarios">Configurações</a>
+              <a href="/usuarios">Preferências</a>
             </li>
             <li>
               <a href="/comprar">Meus pedidos</a>
