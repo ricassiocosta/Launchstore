@@ -63,7 +63,10 @@ module.exports = {
       
     } catch (error) {
       console.error(err)
-      return res.render('user/index', { error: 'Erro ao tentar apagar sua conta!'})
+      return res.render('user/index', { 
+        user: req.body,
+        error: 'Erro ao tentar apagar sua conta!'
+      })
     }
   }
 }
