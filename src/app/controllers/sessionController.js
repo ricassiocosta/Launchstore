@@ -43,7 +43,7 @@ module.exports = {
           <h2>Perdeu a senha?</h2>
           <p>Não se preocupe, clique no link abaixo para recuperar sua senha</p>
           <p>
-            <a href="http://192.168.1.42:3000/usuarios/recuperar-senha?token=${token}" target="_blank">Recuperar senha</a>
+            <a href="http://192.168.1.42:3000/usuarios/redefinir-senha?token=${token}" target="_blank">Recuperar senha</a>
           </p>
         `
       })
@@ -59,11 +59,22 @@ module.exports = {
     }
   },
 
-  resetForm() {
-
+  resetForm(req, res) {
+    return res.render('session/password-reset', {token: req.query.token})
   },
 
-  reset() {
-    
+  reset(req, res) {
+    const { email, password, passwordRepeat, token } = req.body
+
+    try {
+      
+
+
+    } catch (err) {
+      console.error(err)
+      return res.render('session/password-reset', {
+        error: 'Erro inesperado, tente novamente!'
+      })
+    }
   }
 }
