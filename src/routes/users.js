@@ -15,9 +15,9 @@ routes.post('/login', SessionValidator.login, SessionController.login)
 routes.post('/logout', SessionController.logout)
 
 // // reset password / forgot
-// routes.get('/esqueceu-senha', SessionController.forgotForm)
+routes.get('/esqueceu-senha', SessionController.forgotForm)
 // routes.get('/redefinir-senha', SessionController.resetForm)
-// routes.post('/esqueceu-senha', SessionController.forgot)
+routes.post('/esqueceu-senha', SessionValidator.forgot, SessionController.forgot)
 // routes.post('/redefinir-senha', SessionController.reset)
 
 // // user register

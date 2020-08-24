@@ -18,8 +18,6 @@ module.exports = {
   async show(req, res) {
     const { user } = req
 
-    console.log(user)
-
     user.cpf_cnpj = formatCpfCnpj(user.cpf_cnpj)
     user.cep = formatCep(user.cep)
 

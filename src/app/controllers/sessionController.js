@@ -14,8 +14,8 @@ module.exports = {
     return res.redirect('/')
   },
 
-  forgotForm() {
-
+  forgotForm(req, res) {
+    return res.render('session/forgot-password')
   },
 
   forgot() {
