@@ -12,11 +12,11 @@ routes.use('/usuarios', users)
 
 //Alias
 routes.get('/anuncios/criar', (req, res) => {
-  return res.redirect('produtos/criar')
+  return res.redirect('/produtos/criar')
 })
 
 routes.get('/conta', (req, res) => {
-  return res.redirect('usuarios/login')
+  return res.redirect('/usuarios/login')
 })
 
 module.exports = routes

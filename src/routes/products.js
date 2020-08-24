@@ -3,9 +3,10 @@ const routes = express.Router()
 const multer = require('../app/middlewares/multer')
 const ProductController = require('../app/controllers/productController')
 const searchController = require('../app/controllers/searchController')
+const { onlyUsers } = require('../app/middlewares/session')
 
 // Products
-routes.get('/criar', ProductController.create)
+routes.get('/criar', onlyUsers,ProductController.create)
 routes.get('/:id', ProductController.show)
 routes.get('/:id/editar', ProductController.edit)
 
