@@ -16,6 +16,8 @@ module.exports = {
   },
 
   async post(req, res) {
+    req.body.user_id = req.user
+
     const keys = Object.keys(req.body)
 
     for(key of keys) {
