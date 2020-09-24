@@ -1,26 +1,13 @@
-const db = require('../../config/database')
-const { hash } = require('bcryptjs')
-const fs = require('fs')
-const Product = require('../models/Product')
+const Base = require('./Base')
+
+Base.init({ table: 'users' })
 
 module.exports = {
-  async findOne(filters) {
-    let query = 'SELECT * FROM users'
-    Object.keys(filters).map(key => {
-      query = `${query}
-        ${key}
-      `
+  ...Base, 
+}
 
-      Object.keys(filters[key]).map(field => {
-        query = `${query} ${field} = '${filters[key][field]}'`
-      })
-    })
-
-    const results = await db.query(query)
-    return results.rows[0]
-  },
-
-  async create(data) {
+/*
+async create(data) {
     const query = `
     INSERT INTO users (
       name,
@@ -48,27 +35,6 @@ module.exports = {
 
     return results.rows[0].id
   },
-
-  async update(id, fields) {
-    let query = 'UPDATE users SET'
-
-    Object.keys(fields).map((key, index, array) => {
-      if((index + 1) < array.length) {
-        query = `${query}
-          ${key} = '${fields[key]}',
-        `
-      } else {
-        query = `${query}
-          ${key} = '${fields[key]}'
-          WHERE id = ${id}
-        `
-      }
-    })
-
-    await db.query(query)
-    return
-  },
-
   async delete(id) {
     let results = await db.query("SELECT * FROM products WHERE user_id = $1", [id])
     const products = results.rows
@@ -83,4 +49,5 @@ module.exports = {
     })
 
   }
-}
+  
+  */
