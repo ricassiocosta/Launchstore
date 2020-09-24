@@ -5,13 +5,15 @@ Base.init({ table: 'files' })
 module.exports = {
   ...Base,
 
-  files(id) {
-    return db.query(`
+  async files(id) {
+    const results = await db.query(`
       SELECT * FROM files WHERE product_id = $1
     `, [id])
+
+    return results.rows
   },
 
-  search(params) {
+  async search(params) {
     const { filter, category } = params
 
     let query = "",
@@ -38,38 +40,7 @@ module.exports = {
       ${filterQuery}
     `
 
-    return db.query(query)
+    const results = await db.query(query)
+    return results.rows
   }
 }
-/*
-create(data, callback) {
-  // PERSISTINDO DADOS
-  const query = `
-  INSERT INTO products (
-    category_id,
-    user_id,
-    name,
-    description,
-    old_price,
-    price,
-    quantity,
-    status
-  ) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8 )
-  RETURNING ID
-  `
-
-  data.price = data.price.replace(/\D/g, "")
-
-  const values = [
-    data.category_id,
-    data.user_id || 1,
-    data.name,
-    data.description,
-    data.old_price || data.price,
-    data.price,
-    data.quantity,
-    data.status || 1,
-  ]
-
-  return db.query(query, values)
-}*/
