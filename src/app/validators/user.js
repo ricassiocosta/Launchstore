@@ -15,13 +15,13 @@ function checkAllFields(body) {
 }
 
 async function show(req, res, next) {
-  const { userId: id } = req.session
+  const id = req.session.userId
 
-    const user = await User.findOne({where: {id} })
+  const user = await User.findOne({where: {id} })
 
-    if(!user) return res.render('user/register', {
-      error: 'Usuário não encontrado!'
-    })
+  if(!user) return res.render('user/register', {
+    error: 'Usuário não encontrado!'
+  })
   
   req.user = user
 

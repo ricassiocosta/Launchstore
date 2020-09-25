@@ -4,10 +4,10 @@ function find(filters, table) {
   let query = `SELECT * FROM ${table}`
   if(filters) {
     Object.keys(filters).map(key => {
-      query += `${key}`
+      query += ` ${key}`
   
       Object.keys(filters[key]).map(field => {
-        query = `${query} ${field} = '${filters[key][field]}'`
+        query += ` ${field} = '${filters[key][field]}'`
       })
     })
   }
@@ -67,7 +67,6 @@ const Base = {
           ${values.join(',')}
         ) RETURNING id
       `
-
       const results = await db.query(query)
       return results.rows[0]
     } catch (error) {
@@ -93,7 +92,7 @@ const Base = {
     }
   },
 
-  delete() {
+  delete(id) {
     return db.query(`DELETE FROM ${this.table} WHERE id = $1`, [id])
   }
 }

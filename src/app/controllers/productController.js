@@ -1,3 +1,4 @@
+const { unlinkSync } = require('fs')
 const Category = require('../models/Category')
 const Product = require('../models/Product')
 const File = require('../models/File')
@@ -31,7 +32,7 @@ module.exports = {
       let { category_id, name, description, old_price, price, quantity, status } = req.body
       price = price.replace(/\D/g, "")
 
-      const productId = await Product.create({
+      const product = await Product.create({
         category_id, 
         user_id: req.session.userId,
         name, 
@@ -43,11 +44,11 @@ module.exports = {
       })
 
       const filesPromise = req.files.map(file => {
-        File.create(file, productId)
+        File.create({ name: file.filename, path: file.path, product_id: product.id})
       })
       await Promise.all(filesPromise)
 
-      return res.redirect(`produtos/${productId}`)
+      return res.redirect(`produtos/${product.id}`)
     } catch (error) {
       console.error(error);
     }
@@ -117,7 +118,11 @@ module.exports = {
       price = price.replace(/\D/g, "")
 
       if(req.files.length != 0) {
-        const newFilesPromise = req.files.map(file => File.create(file, req.body.id))
+        const newFilesPromise = req.files.map(file => File.create({
+          name: file.name,
+          path: file.path,
+          product_id: req.body.id
+        }))
         await Promise.all(newFilesPromise)
       }
 
@@ -126,16 +131,25 @@ module.exports = {
         const lastIndex = removedFiles.length - 1
         removedFiles.splice(lastIndex, 1)
 
-        const removedFilesPromise = removedFiles.map(id => File.delete(id))
+        const removedFilesPromise = removedFiles.map(async (id) => {
+          const files = await File.findAll({where: {id}})
+          await File.delete(id)
+          files.map(file => {
+            try {
+              unlinkSync(file.path)
+            } catch (error) {
+              console.error(error);
+            }
+          })
+
+        })
         await Promise.all(removedFilesPromise)
       }
 
-      req.body.price = req.body.price.replace(/\D/g, "")
-
-      if(req.body.old_price != req.body.price) {
+      if(old_price != price) {
         const oldProduct = await Product.find(req.body.id)
 
-        req.body.old_price = oldProduct.rows[0].price
+        old_price = oldProduct.price
       }
 
       await Product.update(req.body.id, {
@@ -149,7 +163,16 @@ module.exports = {
 
   async delete(req, res) {
     try {
+      const files = await Product.files(req.body.id)
       await Product.delete(req.body.id)
+
+      files.map(file => {
+        try {
+          unlinkSync(file.path)
+        } catch (error) {
+          console.error(error);
+        }
+      })
 
       return res.redirect('/produtos/criar')
     } catch (error) {

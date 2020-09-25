@@ -4,18 +4,18 @@ const User = require('../models/User')
 async function login(req, res, next) {
   const { email, password } = req.body
 
-    const user = await User.findOne({where: {email} })
+  const user = await User.findOne({where: {email} })
 
-    if(!user) return res.render('session/login', {
-      user: req.body,
-      error: 'Usuário não encontrado!'
-    })
+  if(!user) return res.render('session/login', {
+    user: req.body,
+    error: 'Usuário não encontrado!'
+  })
 
-    const passed = await compare(password, user.password)
-    if(!passed) return res.render('session/login', {
-      user: req.body,
-      error: 'Senha incorreta!'
-    })
+  const passed = await compare(password, user.password)
+  if(!passed) return res.render('session/login', {
+    user: req.body,
+    error: 'Senha incorreta!'
+  })
   
   req.user = user
 
@@ -35,7 +35,7 @@ async function forgot(req, res, next) {
 
     next()
   } catch (err) {
-    console.log(error)
+    console.error(error)
   }
 }
 

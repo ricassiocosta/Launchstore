@@ -19,7 +19,7 @@ module.exports = {
       cpf_cnpj = cpf_cnpj.replace(/\D/g, "")
       cep = cep.replace(/\D/g, "")
 
-      const userId = await User.create({
+      const user = await User.create({
         name,
         email,
         password,
@@ -28,7 +28,7 @@ module.exports = {
         address
       })
 
-      req.session.userId = userId
+      req.session.userId = user.id
   
       return res.redirect('/usuarios')
     } catch (error) {
@@ -89,8 +89,8 @@ module.exports = {
       await User.delete(req.body.id)
       req.session.destroy()
 
-      promiseResults.map(results => {
-        results.rows.map(file => {
+      promiseResults.map(files => {
+        files.map(file => {
           try {
             unlinkSync(file.path)
           } catch (error) {
@@ -104,7 +104,7 @@ module.exports = {
       })
       
     } catch (error) {
-      console.error(err)
+      console.error(error)
       return res.render('user/index', { 
         user: req.body,
         error: 'Erro ao tentar apagar sua conta!'
