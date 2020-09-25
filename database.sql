@@ -38,6 +38,8 @@ CREATE TABLE "users" (
   "cpf_cnpj" text UNIQUE NOT NULL,
   "cep" text,
   "address" text,
+  "reset_token" TEXT,
+  "reset_token_expires" TEXT,
   "created_at" timestamp DEFAULT (now()),
   "updated_at" timestamp DEFAULT (now())
 );
