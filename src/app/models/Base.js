@@ -1,7 +1,7 @@
 const db = require('../../config/database')
 
 function find(filters, table) {
-  let query = `SELECT * FROM ${this.table}`
+  let query = `SELECT * FROM ${table}`
   if(filters) {
     Object.keys(filters).map(key => {
       query += `${key}`
@@ -57,7 +57,7 @@ const Base = {
 
       Object.keys(fields).map(key => {
         keys.push(key)
-        values.push(fields[key])
+        values.push(`'${fields[key]}'`)
       })
 
       const query = `
