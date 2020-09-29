@@ -13,7 +13,7 @@
         <h4>Categorias</h4>
         <ul>
           {% for category in categories %}
-            <li><a href="/buscar?filter={{search.term}}&category={{category.id}}">{{category.name}}</a></li>
+            <li><a href="/produtos/buscar?filter={{search.term}}&category={{category.id}}">{{category.name}}</a></li>
           {% endfor %}
         </ul>
       </nav>
