@@ -5,6 +5,10 @@ const ProductController = require('../app/controllers/productController')
 const searchController = require('../app/controllers/searchController')
 const { onlyUsers } = require('../app/middlewares/session')
 
+
+// Search
+routes.get('/buscar', searchController.index)
+
 // Products
 routes.get('/criar', onlyUsers, ProductController.create)
 routes.get('/:id', ProductController.show)
@@ -14,7 +18,5 @@ routes.post('/', onlyUsers, multer.array('photos', 6), ProductController.post)
 routes.put('/', onlyUsers, multer.array('photos', 6), ProductController.put)
 routes.delete('/', onlyUsers, ProductController.delete)
 
-// Search
-routes.get('/buscar', searchController.index)
 
 module.exports = routes

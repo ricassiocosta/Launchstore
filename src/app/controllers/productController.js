@@ -1,9 +1,10 @@
 const { unlinkSync } = require('fs')
+
 const Category = require('../models/Category')
 const Product = require('../models/Product')
 const File = require('../models/File')
 
-const { formatPrice, date } = require('../../lib/utils')
+const LoadProductService = require('../services/LoadProductService')
 
 module.exports = {
   async create(req, res) {
@@ -56,26 +57,10 @@ module.exports = {
 
   async show(req, res) {
     try {
-      const product = await Product.find(req.params.id)
+      const product = await LoadProductService.load('product', { where: { id: req.params.id } })
       if(!product) return res.send('Produto não encontrado!')
 
-      const { day, hour, minutes, month } = date(product.updated_at)
-
-      product.published = {
-        day: `${day}/${month}`,
-        hour: `${hour}h${minutes}`
-      }
-      
-      product.old_price = formatPrice(product.old_price)
-      product.price = formatPrice(product.price)
-
-      let files = await Product.files(product.id)
-      files = files.map(file => ({
-        ...file,
-        src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-      }))
-
-      return res.render('products/show', { product, files })
+      return res.render('products/show', { product })
     } catch (error) {
       console.error(error);
     }
@@ -83,22 +68,11 @@ module.exports = {
 
   async edit(req, res) {
     try {
-      const product = await Product.find(req.params.id)
-
-      if(!product) return res.send('Produto não encontrado!')
-
-      product.price = formatPrice(product.price)
-      product.old_price = formatPrice(product.old_price)
+      const product = await LoadProductService.load('product', { where: { id: req.params.id } })
 
       const categories = await Category.findAll() 
 
-      let files = await Product.files(product.id)
-      files = files.map(file => ({
-        ...file,
-        src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-      }))
-
-      return res.render('products/edit.njk', { product, categories, files })
+      return res.render('products/edit.njk', { product, categories })
     } catch (error) {
       console.error(error);
     }
