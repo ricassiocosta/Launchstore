@@ -4,6 +4,8 @@ const { unlinkSync } = require('fs')
 const User = require('../models/User')
 const Product = require('../models/Product')
 
+const LoadProductService = require('../services/LoadProductService')
+
 const { formatCpfCnpj, formatCep } = require('../../lib/utils')
 
 module.exports = {
@@ -110,5 +112,13 @@ module.exports = {
         error: 'Erro ao tentar apagar sua conta!'
       })
     }
+  },
+
+  async ads(req, res) {
+    const products = await LoadProductService.load('products', {
+      where: {user_id: req.session.userId}
+    })
+
+    return res.render('user/ads', { products })
   }
 }
