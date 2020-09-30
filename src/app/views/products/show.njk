@@ -47,6 +47,7 @@
         <span class="old">{{product.formattedOldPrice}}</span>
       {% endif %}
     </div>
+    {% if session.userId != product.user_id %}
     <div class="buy">
       {% if product.status == 0 %}
         <p class="unavailable">Indisponível</p>
@@ -59,6 +60,7 @@
       </form>
       {% endif %}
     </div>
+    {% endif %}
   </div>
 </div>
 
