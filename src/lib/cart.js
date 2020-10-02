@@ -41,7 +41,7 @@ const Cart = {
     inCart.formattedPrice = formatPrice(inCart.price)
 
     this.total.quantity++
-    this.total.price = this.product.price * inCart.quantity
+    this.total.price += inCart.product.price
     this.total.formattedPrice = formatPrice(this.total.price)
 
     return this
