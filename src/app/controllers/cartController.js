@@ -28,5 +28,22 @@ module.exports = {
       console.error(error)
     }
 
+  },
+
+  async removeOne(req, res) {
+    try {
+      let { id } = req.params
+      let { cart } = req.session
+      if(!cart) {
+        return res.redirect('/carrinho')
+      }
+
+      req.session.cart = Cart.init(cart).removeOne(id)
+
+      return res.redirect('/carrinho')
+    } catch (error) {
+      console.error(error)
+    }
+
   }
 }
