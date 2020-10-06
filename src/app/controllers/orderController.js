@@ -41,7 +41,7 @@ module.exports = {
 
         order.formattedStatus = statuses[order.status]
         const updatedAt = date(order.updated_at)
-        order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} às ${updatedAt.hour}h${updatedAt.minutes}`
+        order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} às ${updatedAt.hour}h${updatedAt.minutes}min`
 
         return order
       })
