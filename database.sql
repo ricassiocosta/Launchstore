@@ -46,6 +46,23 @@ CREATE TABLE "users" (
 
 ALTER TABLE "products" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
+CREATE TABLE "orders" (
+	"id" SERIAL PRIMARY KEY,
+  "seller_id" int NOT NULL,
+  "buyer_id" int NOT NULL,
+  "product_id" int NOT NULL,
+  "price" int NOT NULL,
+  "quantity" int DEFAULT 0,
+  "total" int NOT NULL,
+  "status" text NOT NULL,
+  "created_at" timestamp DEFAULT (now()),
+  "updated_at" timestamp DEFAULT (now())
+);
+
+ALTER TABLE "orders" ADD FOREIGN KEY ("seller_id") REFERENCES "users" ("id");
+ALTER TABLE "orders" ADD FOREIGN KEY ("buyer_id") REFERENCES "users" ("id");
+ALTER TABLE "orders" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
+
 -- create procedure
 
 CREATE FUNCTION trigger_set_timestamp()
@@ -65,6 +82,11 @@ EXECUTE PROCEDURE trigger_set_timestamp();
 -- auto updated_at users
 CREATE TRIGGER set_timestamp
 BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON orders
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
