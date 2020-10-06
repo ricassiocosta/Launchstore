@@ -45,5 +45,15 @@ module.exports = {
       console.error(error)
     }
 
+  },
+
+  delete(req, res) {
+    let { id } = req.params
+    let { cart } = req.session
+    if(!cart) return res.redirect('/carrinho')
+
+    req.session.cart = Cart.init(cart).delete(id)
+
+    return res.redirect('/carrinho')
   }
 }

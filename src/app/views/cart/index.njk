@@ -4,6 +4,14 @@
 
 {% block content %}
 
+{% if cart.items and cart.items < 1 %}
+  {% call card.render('', 'cart-empty container') %}
+  <p>Carrinho vazio</p>
+  <a href="/produtos/buscar" class="button">Comprar</a>
+  {% endcall %}
+
+{% else %}
+
 {% call card.render('Carrinho', 'cart container') %}
 
 <div class="header">
@@ -11,7 +19,6 @@
   <p>Preço</p>
   <p>Qtd.</p>
 </div>
-
 <div class="items">
   {% for item in cart.items %}
     <div class="item">
@@ -45,7 +52,6 @@
   <p>Total</p>
   <span>{{cart.total.formattedPrice}}</span>
 </div>
-
 <div class="actions">
   <a href="/produtos/buscar" class="button shop">Continuar comprando</a>
   <form class="trash" action="/pedidos" method="POST">
@@ -57,4 +63,5 @@
 
 {% endcall %}
 
+{% endif %}
 {% endblock content %}
