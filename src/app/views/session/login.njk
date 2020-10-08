@@ -5,7 +5,7 @@
 {% block content %}
 
 {% call card.render('Entrar', 'login container') %}
-<form method="POST" action="/usuarios/login">
+<form method="POST" action="/usuario/login">
   <div class="fields">
     {% include 'session/fields.njk' %}
   </div>
@@ -13,10 +13,10 @@
   <div class="footer">
     <ul>
       <li>
-        <a href="/usuarios/registrar">Cadastre-se</a>
+        <a href="/usuario/registrar">Cadastre-se</a>
       </li>
       <li>
-        <a href="/usuarios/esqueceu-senha">Esqueci a senha</a>
+        <a href="/usuario/esqueceu-senha">Esqueci a senha</a>
       </li>
     </ul>
   </div>

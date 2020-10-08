@@ -6,7 +6,7 @@
 
 {% call card.render('Detalhes', 'user-dashboard container') %}
 
-<form method="POST" action="/usuarios?_method=PUT">
+<form method="POST" action="/usuario?_method=PUT">
   <div class="fields">
     {% include 'user/fields.njk' %}
     <input type="hidden" name="id" value="{{ user.id }}">
@@ -15,7 +15,7 @@
   <label for="delete" class="button delete">Deletar</label>
 </form>
 
-<form id="form-delete" action="/usuarios?_method=DELETE" method="POST">
+<form id="form-delete" action="/usuario?_method=DELETE" method="POST">
   <input name="id" value="{{ user.id }}">
   <button id="delete" class="button" type="submit"></button>
 </form>

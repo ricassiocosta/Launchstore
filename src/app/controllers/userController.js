@@ -32,7 +32,7 @@ module.exports = {
 
       req.session.userId = user.id
   
-      return res.redirect('/usuarios')
+      return res.redirect('/usuario')
     } catch (error) {
       console.error(error);
     }

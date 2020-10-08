@@ -11,7 +11,7 @@ module.exports = {
   login(req, res) {
     req.session.userId = req.user.id
 
-    return res.redirect('/usuarios')
+    return res.redirect('/usuario')
   },
 
   logout(req, res) {
@@ -44,7 +44,7 @@ module.exports = {
           <h2>Perdeu a senha?</h2>
           <p>Não se preocupe, clique no link abaixo para recuperar sua senha</p>
           <p>
-            <a href="http://192.168.1.42:3000/usuarios/redefinir-senha?token=${token}" target="_blank">Recuperar senha</a>
+            <a href="http://192.168.1.42:3000/usuario/redefinir-senha?token=${token}" target="_blank">Recuperar senha</a>
           </p>
         `
       })

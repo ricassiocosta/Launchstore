@@ -1,6 +1,6 @@
 function onlyUsers(req, res, next) {
   if(!req.session.userId) 
-    return res.redirect('/usuarios/login')
+    return res.redirect('/usuario/login')
   
   req.user = req.session.userId
 
@@ -9,7 +9,7 @@ function onlyUsers(req, res, next) {
 
 function isLoggedRedirectToUsers(req, res, next) {
   if(req.session.userId) 
-    return res.redirect('/usuarios')
+    return res.redirect('/usuario')
 
   next()
 }

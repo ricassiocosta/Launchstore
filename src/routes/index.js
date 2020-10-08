@@ -10,7 +10,7 @@ const orders = require('./orders')
 routes.get('/', homeController.index)
 
 routes.use('/produtos', products)
-routes.use('/usuarios', users)
+routes.use('/usuario', users)
 routes.use('/carrinho', cart)
 routes.use('/pedidos', orders)
 
@@ -20,7 +20,7 @@ routes.get('/anuncios/criar', (req, res) => {
 })
 
 routes.get('/conta', (req, res) => {
-  return res.redirect('/usuarios/login')
+  return res.redirect('/usuario/login')
 })
 
 module.exports = routes
