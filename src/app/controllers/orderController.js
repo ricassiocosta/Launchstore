@@ -96,5 +96,38 @@ module.exports = {
     const order = await LoadOrderService.load('order', { where: { id: req.params.id }})
 
     return res.render('orders/details', { order })
+  },
+
+  async update(req, res) {
+    try {
+      const { id, action } = req.params
+
+      const acceptedActions = [ 'concluir', 'cancelar' ]
+      if(!acceptedActions.includes(action)) return res.render('orders/sales', {
+        error: 'Ação inválida, tente novamente!'
+      })
+
+      const order = await Order.findOne({ where: { id}})
+      if(!order) return res.render('orders/sales', {
+        error: 'Pedido não encontrado!'
+      })
+      if(order.status != 'open') return res.render('orders/sales', {
+        error: 'O pedido não pode mais ser alterado!'
+      })
+
+      const statuses = {
+        concluir: 'sold',
+        cancelar: 'canceled'
+      }
+      order.status = statuses[action]
+
+      await Order.update(id, {
+        status: order.status
+      })
+
+      return res.redirect('/pedidos/vendas')
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
