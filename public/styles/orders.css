@@ -6,12 +6,11 @@
 
 .orders .item-container {
   display: grid;
-  grid-template-columns: 1fr auto auto 100px;
+  grid-template-columns: 1fr auto auto 100px 100px;
   gap: 32px;
   align-items: center;
   padding: 16px 8px;
   color: #444;
-
 }
 
 .orders .item-container:hover {
@@ -20,7 +19,6 @@
 
 .orders .item {
   display: flex;
-
 }
 
 .orders img {
@@ -67,7 +65,6 @@
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
-
 }
 
 .orders .status.open {
@@ -96,7 +93,6 @@
 
   font-size: 14px;
   font-weight: 300;
-
 }
 
 .order-detail .info h4 {
