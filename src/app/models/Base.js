@@ -50,6 +50,11 @@ const Base = {
     }
   },
 
+  async findOneWithDeleted(filters) {
+    const results = await find(filters, `${this.table}_with_deleted`)
+    return results.rows[0]
+  },
+
   async create(fields) {
     try {
       let keys = [],

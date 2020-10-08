@@ -41,7 +41,8 @@ CREATE TABLE "users" (
   "reset_token" TEXT,
   "reset_token_expires" TEXT,
   "created_at" timestamp DEFAULT (now()),
-  "updated_at" timestamp DEFAULT (now())
+  "updated_at" timestamp DEFAULT (now()),
+  "deleted_at" timestamp,
 );
 
 ALTER TABLE "products" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
@@ -62,6 +63,15 @@ CREATE TABLE "orders" (
 ALTER TABLE "orders" ADD FOREIGN KEY ("seller_id") REFERENCES "users" ("id");
 ALTER TABLE "orders" ADD FOREIGN KEY ("buyer_id") REFERENCES "users" ("id");
 ALTER TABLE "orders" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
+
+CREATE OR REPLACE RULE delete_product AS
+ON DELETE TO products DO INSTEAD
+UPDATE products 
+SET deleted_at = now()
+WHERE products.id = old.id;
+
+CREATE VIEW products_without_deleted AS
+SELECT * FROM products WHERE deleted_at IS NULL;
 
 -- create procedure
 
