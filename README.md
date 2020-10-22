@@ -15,11 +15,6 @@ users default password is '1234'
 
 you can use both <strong>yarn</strong> or <strong>npm</strong>
 
-## Others application images
-![search](https://drive.google.com/uc?export=view&id=1UnkGmIJ8puPYpbz_Ndt5f3h6xbFBx78K)
-![cart](https://drive.google.com/uc?export=view&id=1yrmuSLp4KwntTcyaX_ZE60A3zgQYfImP)
-![success](https://drive.google.com/uc?export=view&id=1vxPygVjsE1PSRiiIzHII_k9_dGbksCjG)
-
 ## Contributing
 
 1. Fork it (<https://github.com/ricassiocosta/launchstore/fork>)
