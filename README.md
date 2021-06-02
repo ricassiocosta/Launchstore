@@ -2,7 +2,7 @@
 
 This is the project for a virtual store called Launchstore, developed during the Launchbase course, in which the Nunjucks template engine was used
 
-![Launchstore](https://drive.google.com/uc?export=view&id=1gdaMZmZK_10lTGJWmAJXYiO0eKFpzaU-)
+![Launchstore](./.github/launchstore_home.png)
 
 ## Installation
 
@@ -11,6 +11,7 @@ yarn install
 node seed.js
 yarn start
 ```
+
 users default password is '1234'
 
 you can use both <strong>yarn</strong> or <strong>npm</strong>
@@ -27,7 +28,8 @@ you can use both <strong>yarn</strong> or <strong>npm</strong>
 
 Ricássio Costa – [Linkedin](https://linkedin.com/in/ricassiocosta) – riksiocosta@gmail.com
 
-Distributed under the MIT license. See ``LICENSE`` for more information.
+Distributed under the MIT license. See `LICENSE` for more information.
 
 <!-- Markdown link & img dfn's -->
+
 [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
